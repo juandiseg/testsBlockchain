@@ -5,48 +5,48 @@ from dataParsers import *
 class retriever:
 
     @staticmethod
-    def sendGetRequest(surgery:bool=False, userAccess:bool=False, injury:bool=False, incident:bool=False, drug:bool=False, appointment:bool=False, allergy:bool=False):
+    def sendGetRequest(baseURL:str, surgery:bool=False, userAccess:bool=False, injury:bool=False, incident:bool=False, drug:bool=False, appointment:bool=False, allergy:bool=False):
         try:
             headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
             filters = {"surgery" : surgery,"userHasAccess": userAccess,"injury" : injury,"incident" : incident,"drug" : drug,"appointment" : appointment,"allergy" : allergy}
-            url = "http://127.0.0.1:5000/data/-1"
+            url = baseURL + "data/-1"
             return requests.get(url, headers=headers,data=json.dumps(filters))
         except:
             return False
 
     @staticmethod
-    def checkSurgery():
-        x = retriever.sendGetRequest(surgery=True)
+    def checkSurgery(baseURL:str):
+        x = retriever.sendGetRequest(baseURL, surgery=True)
         return retriever.checkResponse(x)
     
     @staticmethod
-    def checkUserHasAccess():
-        x = retriever.sendGetRequest(userAccess=True)
+    def checkUserHasAccess(baseURL:str):
+        x = retriever.sendGetRequest(baseURL, userAccess=True)
         return retriever.checkResponse(x)
     
     @staticmethod
-    def checkInjury():
-        x = retriever.sendGetRequest(injury=True)
+    def checkInjury(baseURL:str):
+        x = retriever.sendGetRequest(baseURL, injury=True)
         return retriever.checkResponse(x)
     
     @staticmethod
-    def checkIncident():
-        x = retriever.sendGetRequest(incident=True)
+    def checkIncident(baseURL:str):
+        x = retriever.sendGetRequest(baseURL, incident=True)
         return retriever.checkResponse(x)
     
     @staticmethod
-    def checkDrug():
-        x = retriever.sendGetRequest(drug=True)
+    def checkDrug(baseURL:str):
+        x = retriever.sendGetRequest(baseURL, drug=True)
         return retriever.checkResponse(x)
     
     @staticmethod
-    def checkAppointment():
-        x = retriever.sendGetRequest(appointment=True)
+    def checkAppointment(baseURL:str):
+        x = retriever.sendGetRequest(baseURL, appointment=True)
         return retriever.checkResponse(x)
     
     @staticmethod
-    def checkAllergy():
-        x = retriever.sendGetRequest(allergy=True)
+    def checkAllergy(baseURL:str):
+        x = retriever.sendGetRequest(baseURL, allergy=True)
         return retriever.checkResponse(x)
     
     @staticmethod
@@ -72,19 +72,19 @@ class retriever:
         retriever.failed()
 
     @staticmethod
-    def test():
+    def test(baseURL:str):
         print("\n2 | RETRIEVING DATA:")
         print("  2.1 | Retrieve surgery\t", end="")
-        retriever.result(retriever.checkSurgery())
+        retriever.result(retriever.checkSurgery(baseURL))
         print("  2.2 | Retrieve user access\t", end="")
-        retriever.result(retriever.checkUserHasAccess())
+        retriever.result(retriever.checkUserHasAccess(baseURL))
         print("  2.3 | Retrieve injury\t\t", end="")
-        retriever.result(retriever.checkInjury())
+        retriever.result(retriever.checkInjury(baseURL))
         print("  2.4 | Retrieve incident\t", end="")
-        retriever.result(retriever.checkIncident())
+        retriever.result(retriever.checkIncident(baseURL))
         print("  2.5 | Retrieve drug\t\t", end="")
-        retriever.result(retriever.checkDrug())
+        retriever.result(retriever.checkDrug(baseURL))
         print("  2.6 | Retrieve appointment\t", end="")
-        retriever.result(retriever.checkAppointment())
+        retriever.result(retriever.checkAppointment(baseURL))
         print("  2.7 | Retrieve allergy\t", end="")
-        retriever.result(retriever.checkAllergy())
+        retriever.result(retriever.checkAllergy(baseURL))

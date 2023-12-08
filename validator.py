@@ -16,9 +16,9 @@ class validator:
         validator.failed()
 
     @staticmethod
-    def sendGetValidation():
+    def sendGetValidation(baseURL:str):
         try:
-            url = "http://127.0.0.1:5000/data/validate"
+            url = baseURL + "data/validate"
             return requests.get(url).content.decode("utf-8")
         except:
             return "FAILED"
@@ -31,7 +31,7 @@ class validator:
         validator.failed()
 
     @staticmethod
-    def test():
+    def test(baseURL:str):
         print("\n3 | BLOCKCHAIN VALID: \t", end="")
-        result = validator.sendGetValidation()
+        result = validator.sendGetValidation(baseURL)
         validator.checkResponse(result)
